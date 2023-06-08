@@ -8,7 +8,7 @@ export interface ActivityResponse {
 
 const fetchActivity = async () => {
   const res = await axios.get<ActivityResponse>(
-    "http://www.boredapi.com/api/activity/"
+    "https://www.boredapi.com/api/activity/"
   );
 
   return {
