@@ -1,6 +1,6 @@
 "use client";
-
 import { useEffect, useState } from "react";
+import Button from "../../components/Button";
 import fetchActivity, { ActivityResponse } from "./api/utils";
 
 export default function Home() {
@@ -10,9 +10,9 @@ export default function Home() {
     type: ""
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
+  const fetch = () => {
     setLoading(true);
 
     fetchActivity()
@@ -22,6 +22,10 @@ export default function Home() {
       .catch((err) => console.log(err));
 
     setLoading(false);
+  };
+
+  useEffect(() => {
+    fetch();
   }, []);
 
   return (
@@ -29,7 +33,7 @@ export default function Home() {
       <div className="relative flex flex-col place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
         <h1 className='md:text-5xl text-2xl font-black '>BOREDOM APP</h1>
         <p className='text-red-600 text-xs'>
-          don&lsquo;t know what to do? you came at the right place !
+          Don&lsquo;t know what to do? you came at the right place !
         </p>
       </div>
 
@@ -47,6 +51,12 @@ export default function Home() {
             <h2>You should invite {activity.participants} more person.</h2>
           </>
         )}
+      </div>
+
+      <div className='relative flex'>
+        <Button loading={loading} onClick={fetch}>
+          Doesn&lsquo;t suit you? Click here..
+        </Button>
       </div>
 
       <h1 className='font-black'>Made by Edwin Fernaldy &copy;2023</h1>
