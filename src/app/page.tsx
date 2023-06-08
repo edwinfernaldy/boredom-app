@@ -18,10 +18,13 @@ export default function Home() {
     fetchActivity()
       .then((res) => {
         setActivity(res);
-      })
-      .catch((err) => console.log(err));
 
-    setLoading(false);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
