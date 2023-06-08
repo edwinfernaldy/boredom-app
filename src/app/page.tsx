@@ -10,12 +10,18 @@ export default function Home() {
     type: ""
   });
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
+
     fetchActivity()
       .then((res) => {
         setActivity(res);
       })
       .catch((err) => console.log(err));
+
+    setLoading(false);
   }, []);
 
   return (
@@ -27,10 +33,20 @@ export default function Home() {
         </p>
       </div>
 
-      <div className='flex animate-pulse flex-col items-center justify-center gap-4'>
-        <h1 className='text-5xl font-black'>{activity.activity}</h1>
-        <h3 className='uppercase'>{activity.type}</h3>
-        <h2>You should invite {activity.participants} more person</h2>
+      <div className='flex flex-col items-center justify-center gap-4'>
+        {loading ? (
+          <h1 className='animate-pulse text-4xl font-black text-center'>
+            Thinking ..
+          </h1>
+        ) : (
+          <>
+            <h1 className='text-4xl font-black text-center'>
+              {activity.activity}
+            </h1>
+            <h3 className='uppercase'>{activity.type}</h3>
+            <h2>You should invite {activity.participants} more person.</h2>
+          </>
+        )}
       </div>
 
       <h1 className='font-black'>Made by Edwin Fernaldy &copy;2023</h1>
