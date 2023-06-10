@@ -51,7 +51,9 @@ export default function Home() {
               {activity.activity}
             </h1>
             <h3 className='uppercase'>{activity.type}</h3>
-            <h2>You should invite {activity.participants} more person.</h2>
+            {activity.participants !== 1 && (
+              <h2>You should invite {activity.participants} more person.</h2>
+            )}
           </>
         )}
       </div>
